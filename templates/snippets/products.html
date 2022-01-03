@@ -1,0 +1,75 @@
+{% load static %}
+<div class="ps-section ps-home-menu-of-day bg--cover" data-background="{% static 'app/img/bg/home-6/home-menu-of-day.jpg' %}">
+    <div class="container">
+      <div class="ps-section__header"><i class="chikery-tt4"></i>
+        <p> Sophy's Specials </p>
+        <h3>  </h3>
+      </div>
+      <div class="ps-section__content">
+        <div class="ps-block--product-menu ps-tab-root">
+          <div class="ps-block__header">
+            <ul class="ps-tab-list">
+              {% for object in products %}
+              {% if forloop.last == False %}
+              <!-- <li class="active"><a href="#{{ object.slug }}"><i class="chikery-bk1"></i> {{ object.name }}</a></li> -->
+              {% endif %}
+              <li class="active"><a href="#{{ object.slug }}"><i class="chikery-bk1"></i> {{ object.name }}</a></li>
+              
+              <!-- <li><a href="#{{ object.slug }} "><i class="chikery-bk3"></i> {{ object.name }} </a></li> -->
+              {% endfor %}
+              <!-- <li class="active"><a href="#tab-menu-1"><i class="chikery-bk1"></i> Combo Bread</a></li>
+              <li><a href="#tab-menu-2"><i class="chikery-bk2"></i> Cream cake</a></li>
+              <li><a href="#tab-menu-3"><i class="chikery-bk3"></i> Set Bakery</a></li>
+              <li><a href="#tab-menu-4"><i class="chikery-bk4"></i> Combo Cookies</a></li> -->
+            </ul>
+          </div>
+          <div class="ps-tabs">
+            
+            {% for obj in products %}
+            {% if forloop.first %}
+            <div class="ps-tab active" id="{{ obj.slug }}">
+              <div class="ps-product--combo">
+                <div class="ps-product__thumbnail"><img src="{{ obj.image.url }}" alt=""><a class="ps-product__overlay" href="product-default.html"></a><span class="ps-badge ps-badge--sale"><i>30%</i></span></div>
+                <div class="ps-product__content">
+                  <h4 class="ps-product__title"> {{ obj.name }} </h4>
+                  <figure>
+                    <figcaption>description:</figcaption>
+                    <p> {{ obj.description }} fuck ac elit a ante commodo tristique. Duis lacus urna, condimentum a vehicula hendrerit, Curabitur sed turpis feugiat, mollis felis vel, viverra metus. Sed vel nulla non neque dictum imperdiet. Aliquam egestas hendrerit euismod.</p>
+                  </figure>
+                  <figure>
+                    <figcaption>ingridients:</figcaption>
+                    <p> {{ obj.ingridients }}  </p>
+                  </figure>
+                  <p class="ps-product__price"> On this week:<span>
+                      <del>$16.00</del> {{ obj.price }} KSH</span></p>
+                  <div class="ps-product__book"><a class="ps-btn" href="{% url 'product-detail' obj.slug %}"> Book Now</a></div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            <div class="ps-tab" id="{{ obj.slug }}">
+              <div class="ps-product--combo">
+                <div class="ps-product__thumbnail"><img src="{{ obj.image.url }}" alt=""><a class="ps-product__overlay" href="product-default.html"></a><span class="ps-badge ps-badge--sale"><i>30%</i></span></div>
+                <div class="ps-product__content">
+                  <h4 class="ps-product__title"> {{ obj.name }} </h4>
+                  <figure>
+                    <figcaption>description:</figcaption>
+                    <p> {{ obj.description }} fuck ac elit a ante commodo tristique. Duis lacus urna, condimentum a vehicula hendrerit, Curabitur sed turpis feugiat, mollis felis vel, viverra metus. Sed vel nulla non neque dictum imperdiet. Aliquam egestas hendrerit euismod.</p>
+                  </figure>
+                  <figure>
+                    <figcaption>ingridients:</figcaption>
+                    <p> {{ obj.ingridients }}  </p>
+                  </figure>
+                  <p class="ps-product__price"> On this week:<span>
+                      <del>$16.00</del> {{ obj.price }} KSH</span></p>
+                  <div class="ps-product__book"><a class="ps-btn" href="{% url 'product-detail' obj.slug %}"> Book Now</a></div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

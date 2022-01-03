@@ -1,0 +1,107 @@
+{% extends 'backend/base.html' %}
+
+{% block content %}
+<div class="page-header">
+    <!-- <h3 class="page-title"> Category </h3> -->
+    <a href="{% url 'backend:order-add' %}" class="btn btn-primary"> <i class="fas fa-plus-square fa-lg "></i> New Entry </a>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'backend:index' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> category </li>
+      </ol>
+    </nav>
+</div>
+
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+    <div class="card-header">
+        <!-- <a href="{% url 'backend:order-add' %}" class="btn btn-primary"> <i class="fas fa-plus-square"></i> All Orders </a> -->
+        <p> All Orders </p>
+    </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="color: white"> Items </th>
+
+
+                <th style="color: white"> Quantity </th>
+
+                <th style="color: white"> Customer </th>
+
+                <th style="color: white"> Message </th>
+
+                <!-- <th> Products </th> -->
+                <th style="color: white"> Action </th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for obj in object_list %}
+                
+              <tr>
+                <td> 
+                  {% for item in obj.item.all %}
+                  <span> {{ item }} <br></span>
+                  {% endfor %}
+                </td>
+                <td>
+                  {% for item in obj.item.all %}
+                  <span> {{ item.quantity }} <br></span>
+                  {% endfor %}
+                </td>
+                <td>
+                  {% for x in obj.customer.order_customer.all %}
+                  <span>
+                    {{ x }}
+                    <br></span>
+                  {% endfor %}
+                </td>
+                <td class="ClickedMessage">
+                  <!-- {{ obj.message }} -->
+                  <!-- Button trigger modal -->
+                  <span id="viewcontent" data-id="{{ obj.id }}" data-toggle="modal" class="btn" data-target="#LargeContent">
+                    <i class="fas fa-3x fa-eye"></i>
+                  </span>  
+                </td>
+                <td>
+                  <span <i class="fas fa-check-circle fa-lg "></i> </span>
+                </td>
+                <td> 
+                  <span id="delete_product" data-id="{{ obj.id }}" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-danger">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </span>
+                </td>
+              </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- View Large Content -->
+
+<div class="modal  fade" id="LargeContent" tabindex="-1" role="dialog" aria-labelledby="LargeContent" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"> Large Content </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% load static %}
+{% load humanize %}
+{% load cart_tag %}
+
+<div class="ps-panel--sidebar" id="cart-mobile">
+    <div class="ps-panel__header">
+      <h3>Shopping Cart</h3>
+    </div>
+    <div class="navigation__content">
+      <div class="ps-cart--mobile">
+        <div class="ps-cart__content">
+          <div class="ps-cart__items">
+            {% for key,value in request.session.cart.items %}
+            <div class="ps-product--mini-cart">
+              <div class="ps-product__thumbnail"><a href="#"><img src="{% static 'app/img/product/12.png' %}" alt=""></a></div>
+              <div class="ps-product__content">
+                <span id="clear_cart_item" data-id="{{ value.product_id }}" class="clear-cart ps-btn--close"></span>
+                <a class="ps-product__title" href="product-default.html"> {{ value.name }} </a>
+                <p><strong> quantity -  <span id="phone_cart_quantity{{ value.product_id }}"> {{ value.quantity }} </span> </strong></p><small> Price <span id="total_amount_phone_cart{{ value.product_id }}" class="total_amount_phone_cart"> {{ value.price|multiply:value.quantity|intcomma }} </span>   </small>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <div class="ps-cart__footer">
+            <h3>Sub Total:<strong> <span id="phone_cart_total">  </span> </strong></h3>
+            <figure><a class="ps-btn" href="{% url 'cart:index' %}">View Cart</a></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

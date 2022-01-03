@@ -1,0 +1,9 @@
+#success-alert{
+    position: absolute;
+    right: 0;
+    display: none;
+}
+
+#delete_product{
+    cursor: pointer;
+}

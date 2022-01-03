@@ -1,0 +1,120 @@
+{% extends 'frontend/base.html' %}
+
+{% block menu %} {% include '../snippets/menu2.html' %} {% endblock %}
+{% block page %}
+{% load static %}
+<div class="custom_homepage" id="homepage-3">
+  <div class="ps-hero bg--cover" data-background="{% static 'app/img/hero/shop-hero.png' %}">
+      <div class="ps-hero__container">
+        <div class="ps-breadcrumb">
+          <ul class="breadcrumb">
+            <li><a href="index-2.html">Home</a></li>
+            <li>About Us</li>
+          </ul>
+        </div>
+        <h1 class="ps-hero__heading">About Us</h1>
+      </div>
+  </div>
+
+  <div class="ps-section ps-home-about bg--cover" data-background="{% static 'app/img/bg/home-5/home-about.jpg' %}">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+          <div class="ps-section__image"><img src="{% static 'app/img/homepage/home-5/home-about.png' %}" alt=""></div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 ">
+          <div class="ps-section__header">
+            <p>Our History</p>
+            <h3> Sophys Goddies story </h3><i class="chikery-tt2"></i>
+          </div>
+          <div class="ps-section__content">
+            <p>“ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed turpis feugiat, mollis felis vel, viverra metus. Sed vel nulla non neque dictum imperdiet hendrerit ”</p>
+            <!-- <div class="ps-section__image"><img src="{% static 'app/img/homepage/home-1/signature.png' %}" alt=""></div> -->
+            <h5><span> Sophy qassim </span> - Ceo Sophy_goddies</h5>
+          </div>
+        </div>
+        
+      </div>
+      <div id="custom_about_us" class="row">
+        <div class="col-md-12 m-5">
+          <p>
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="ps-section ps-home-awards bg--cover" data-background="{% static 'app/img/bg/home-2/home-award.jpg' %}">
+    <div class="container">
+      <div class="ps-section__header">
+        <p> Sophy_goddies </p>
+        <h3>Our Awards</h3><i class="chikery-tt3"></i>
+      </div>
+      <div class="ps-section__content">
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+            <div class="ps-block--award">
+              <div class="ps-block__header"><img src="{% static 'app/img/awards/1.png' %}" alt="">
+                <h4>BAKERY OF THE YEAR</h4>
+                <p>1990 - 2010</p>
+              </div>
+              <div class="ps-block__content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed turpis feugiat, mollis felis vel, viverra metus.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+            <div class="ps-block--award">
+              <div class="ps-block__header"><img src="{% static 'app/img/awards/2.png' %}" alt="">
+                <h4>CUPCAKES SHOP OF THE YEAR</h4>
+                <p>2012 - 2018</p>
+              </div>
+              <div class="ps-block__content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed turpis feugiat, mollis felis vel, viverra metus.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+            <div class="ps-block--award">
+              <div class="ps-block__header"><img src="{% static 'app/img/awards/3.png' %}" alt="">
+                <h4>Awards Bakery academy</h4>
+                <p>2012 - 2018</p>
+              </div>
+              <div class="ps-block__content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed turpis feugiat, mollis felis vel, viverra metus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ps-section ps-home-special-cake bg--top-left" data-background="{% static 'app/img/bg/home-3/recipe.jpg' %}">
+    <div class="container">
+      <div class="ps-section__header">
+        <p>Special CAKE</p>
+        <h3>Special cake recipe</h3><i class="chikery-tt1"></i>
+      </div>
+      <div class="ps-section__content">
+        <h4>Any design for your feast-day</h4>
+        <p>Sed id interdum urna. Nam ac elit a ante commodo tristique. Duis lacus urna, condimentum a vehicula a, hendrerit ac nisi Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Curabitur sed turpis feugiat, mollis felis vel, viverra metus. Sed vel nulla non neque dictum imperdiet. Aliquam</p>
+        <ul class="ps-list--dot">
+          <li><i>Condimentum a vehicula</i></li>
+          <li><i>Aliquam et elit</i></li>
+          <li><i>Donec maximus placerat</i></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+{% block footer %}
+{% include '../snippets/footer.html' %}
+{% endblock %}

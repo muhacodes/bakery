@@ -1,0 +1,56 @@
+{% load static %}
+{% load humanize %}
+{% load cart_tag %}
+<header class="header header--default header--home-4 line" data-sticky="true">
+    <div class="header__left">
+      <ul class="ps-list--social">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+      </ul>
+    </div>
+    <div class="header__center">
+      <nav class="header__navigation left">
+        <ul class="menu">
+            <li><a href="/"> Home </a>  </li>
+            <li> <a href="{% url 'about' %}"> About </a> </li>
+        </ul>
+      </nav>
+      <div class="header__logo"><a class="ps-logo" href="index-2.html"><img src="{% static 'app/img/logo.png' %}" alt=""></a></div>
+      <nav class="header__navigation right">
+        <ul class="menu">
+            <li> <a href="/"> Blog </a> </li>
+            <li> <a href="{% url 'contact' %}"> Contact Us </a> </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="header__right">
+      <div class="header__actions"><a class="ps-search-btn" href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-heart-o"></i></a>
+        <div class="ps-cart--mini"><a class="ps-cart__toggle" href="#"><i class="fa fa-shopping-basket"></i><span><i>2</i></span></a>
+          <div class="ps-cart__content">
+            <div class="ps-cart__items">
+              {% for key,value in request.session.cart.items %}
+              <small> menu2 </small>
+              <div class="ps-product--mini-cart">
+                <div class="ps-product__thumbnail"><a href="#"><img src="img/product/12.png" alt=""></a></div>
+                <div class="ps-product__content">
+                  <span class="ps-btn--close"></span>
+                  <a class="ps-product__title" href="product-default.html"> {{ value.name }} </a>
+                  <p>
+                    <strong>  quantity - <span id="side_cart_quantity{{ value.product_id }}"> {{ value.quantity }} </span> </strong>
+                  </p>
+                  <small> Price <span class="total_amount_side_cart" id="total_amount_side_cart{{ value.product_id }}"> {{ value.price|intcomma }}  </span> </small>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="ps-cart__footer">
+              <h3>Sub Total:<strong>  <span id="side_cart_total">  </span> </strong></h3>
+              <figure><a class="ps-btn" href="{% url 'cart:index' %}">View Cart</a></figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>

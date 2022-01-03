@@ -1,0 +1,97 @@
+{% extends 'frontend/base.html' %}
+
+{% block menu %} {% include '../snippets/menu2.html' %} {% endblock %}
+{% block page %}
+{% load static %}
+{% load humanize %}
+{% load cart_tag %}
+
+<div class="ps-page">
+    <div class="ps-hero bg--cover" data-background="{% static 'app/img/hero/shop-hero.png' %}">
+      <div class="ps-hero__container">
+        <div class="ps-breadcrumb">
+          <ul class="breadcrumb">
+            <li><a href="index-2.html">Home</a></li>
+            <li>Checkout</li>
+          </ul>
+        </div>
+        <h1 class="ps-hero__heading">Checkout</h1>
+      </div>
+    </div>
+    <div class="container">
+        <div class="ps-checkout">
+          <div class="ps-checkout__left">
+            
+            <form class="ps-form--checkout" action="#" method="post">
+               {% csrf_token %}
+              <h4>order details</h4>
+              <div class="form-group">
+                {% for field in address %}
+                    <label> {{ field.label }} </label>
+                    {{ field }}
+                    {{ field.errors }}
+                {% endfor %}
+                
+                
+              </div>
+              <div class="form-group">
+                <label>Order Note</label>
+                <textarea name="notes" class="form-control" rows="4" placeholder=""></textarea>
+              </div>
+              <div class="form-group">
+                <h3> Personal Information </h3>
+                {% for field in customer %}
+                    <label> {{ field.label }} </label>
+                    {{ field }}
+                    {{ field.errors }}
+                {% endfor %}
+              </div>
+              <div class="ps-block__footer">
+                <button type="submit" class="ps-btn ps-btn--fullwidth">Place Order</button>
+              </div>
+            </form>
+          </div>
+          <div class="ps-checkout__right">
+            <div class="ps-block--your-order">
+              <div class="ps-block__header">
+                <h3>Your order</h3>
+              </div>
+              <div class="ps-block__divider"></div>
+              <div class="ps-block__detail">
+                <h5>Products</h5>
+                {% for key,value in request.session.cart.items %}
+                <p> {{ value.quantity }} X {{ value.name }} <span> {{ value.price|multiply:value.quantity|intcomma }} </span></p>
+                {% endfor %}
+                <div class="ps-block__divider"></div>
+                <p>Subtotal<strong>$48.00</strong></p>
+                <div class="ps-block__divider"></div>
+                <p>Shipping<span>0</span></p>
+                <div class="ps-block__divider"></div>
+                <p class="total">Total<strong>$48.00</strong></p>
+                
+              </div>
+              <div class="ps-block__payment-methond">
+                <div class="ps-radio">
+                  <input class="form-control"  type="radio" id="order-1" name="order"/>
+                  <label for="order-1"> Cash on Delivery </label>
+                </div>
+                <div class="ps-radio">
+                  <input class="form-control" type="radio" id="order-2" name="order"/>
+                  <label for="order-2"> Lipa Na Mpesa </label>
+                </div>
+                <div class="ps-radio">
+                  <input class="form-control" type="radio" id="order-3" name="order"/>
+                  <label for="order-3">Paypal <i class='fa fa-cc-mastercard'></i><i class='fa fa-cc-paypal'></i><i class='fa fa-cc-visa'></i><i class='fa fa-cc-discover'></i></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block footer %}
+{% include '../snippets/footer.html' %}
+{% endblock %}

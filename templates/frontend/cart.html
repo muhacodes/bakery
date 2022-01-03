@@ -1,0 +1,103 @@
+{% extends 'frontend/base.html' %}
+
+{% block menu %} {% include '../snippets/menu2.html' %} {% endblock %}
+{% block page %}
+{% load static %}
+{% load humanize %}
+{% load cart_tag %}
+
+<div class="ps-page">
+  <div class="ps-hero bg--cover" data-background="{% static 'app/img/hero/shop-hero.png' %}">
+    <div class="ps-hero__container">
+      <div class="ps-breadcrumb">
+        <ul class="breadcrumb">
+          <li><a href="index-2.html">Home</a></li>
+          <li>Cart</li>
+        </ul>
+      </div>
+      <h1 class="ps-hero__heading">Cart</h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class="ps-shopping-cart">
+
+      {% if request.session.cart %}
+
+      <div class="table-responsive">
+        <table class="table ps-table ps-table--shopping-cart">
+          
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Unit Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key,value in request.session.cart.items %}
+            {{value.name}}
+            {{ value.id }}
+            <tr>
+              <td>
+                <div class="ps-product--cart">
+                  <div class="ps-product__thumbnail"><img src="{% static 'app/img/product/3.png' %}" alt=""><a class="ps-product__overlay" href="product-detail.html"></a></div>
+                  <div class="ps-product__content"><a class="ps-product__title" href="product-detail.html"> {{ value.name }} </a></div>
+                </div>
+              </td>
+              <td id="{{ value.name }}"> {{ value.price|intcomma }}  </td>
+              <td>
+                <div id="increment" class="form-group--number">
+                  <button data-price="{{ value.price }}" data-id="{{ value.product_id }}" class="up"></button>
+                  <button data-price="{{ value.price }}" data-id="{{ value.product_id }}" class="down"></button>
+                  <input disabled id="{{ value.product_id }}" name="quantity" value="{{ value.quantity }}" class="form-control" type="text" placeholder="1">
+                </div>
+              </td>
+              <td id="total{{ value.product_id }}" data-total="{{ value.price|multiply:value.quantity|intcomma }}" class="total_amount"> {{ value.price|multiply:value.quantity|intcomma }}  </td>
+              <td id="clear_cart_item"> <a onclick="return false;" href="#" class="clear-cart" data-id="{{ value.product_id }}" > <span> <i class="fas fa-window-close"></i> </span> </a></td>
+              <td class="ps-table__actions">  
+            </tr>
+            {% endfor %}
+          </tbody>
+          
+
+        </table>
+      </div>
+      <div class="ps-section__actions">
+        <figure class="ps-shopping-cart__total">
+          <figcaption>Cart Total</figcaption>
+          <table class="table">
+           
+            
+            <tr class="total">
+              <td>Total</td>
+              <td id="subtotal"> </td>
+            </tr>
+          </table><a class="ps-btn ps-btn--fullwidth" href="{% url 'checkout' %}">Proceed to checkout</a>
+        </figure>
+        
+      </div>
+      {% else %}
+      <div class="alert alert-danger">
+        <h3> There are no items in the cart </h3>
+      </div>
+      {% endif %}
+      <div class="ps-section__footer">
+        <!-- <div class="ps-shopping-cart__coupon">
+          <p>Enter your code if you have one. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+          <div class="form-group">
+            <input class="form-control" type="text" placeholder="Enter you code here">
+            <button class="ps-btn">Apply Coupon</button>
+          </div>
+        </div> -->
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block footer %}
+{% include '../snippets/footer.html' %}
+{% endblock %}
