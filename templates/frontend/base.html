@@ -25,7 +25,11 @@
     {% include '../snippets/phone_menu.html' %}
 
     <div class="navigation--list">
-      <div class="navigation__content"><a class="navigation__item active" href="index-2.html"><i class="fa fa-home"></i></a><a class="navigation__item ps-toggle--sidebar" href="#navigation-mobile"><i class="fa fa-bars"></i></a><a class="navigation__item ps-toggle--sidebar" href="#search-sidebar"><i class="fa fa-search"></i></a><a class="navigation__item ps-toggle--sidebar" href="#cart-mobile"><i class="fa fa-shopping-basket"></i></a></div>
+      <div class="navigation__content">
+        <a class="navigation__item active" href="{% url 'home' %}"><i class="fa fa-home"></i></a>
+        <a class="navigation__item ps-toggle--sidebar" href="#navigation-mobile"><i class="fa fa-bars"></i></a>
+        <a class="navigation__item ps-toggle--sidebar" href="#cart-mobile"><i class="fa fa-shopping-basket"></i></a>
+      </div>
     </div>
     <!--include search-sidebar-->
     

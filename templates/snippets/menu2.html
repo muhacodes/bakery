@@ -13,11 +13,11 @@
     <div class="header__center">
       <nav class="header__navigation left">
         <ul class="menu">
-            <li><a href="/"> Home </a>  </li>
-            <li> <a href="{% url 'about' %}"> About </a> </li>
+          <li><a href="/"> Home </a>  </li>
+          <li> <a href="{% url 'about' %}"> About </a> </li>
         </ul>
       </nav>
-      <div class="header__logo"><a class="ps-logo" href="index-2.html"><img src="{% static 'app/img/logo.png' %}" alt=""></a></div>
+      <div class="header__logo"><a class="ps-logo" href="{% url 'home' %}"><img src="{% static 'app/img/logo.png' %}" alt=""></a></div>
       <nav class="header__navigation right">
         <ul class="menu">
             <li> <a href="/"> Blog </a> </li>

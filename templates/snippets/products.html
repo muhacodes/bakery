@@ -29,7 +29,7 @@
             {% if forloop.first %}
             <div class="ps-tab active" id="{{ obj.slug }}">
               <div class="ps-product--combo">
-                <div class="ps-product__thumbnail"><img src="{{ obj.image.url }}" alt=""><a class="ps-product__overlay" href="product-default.html"></a><span class="ps-badge ps-badge--sale"><i>30%</i></span></div>
+                <div class="ps-product__thumbnail"><img src="{{ obj.image.url }}" alt=""><a class="ps-product__overlay" href="{% url 'product-detail' obj.slug %}"></a><span class="ps-badge ps-badge--sale"><i>30%</i></span></div>
                 <div class="ps-product__content">
                   <h4 class="ps-product__title"> {{ obj.name }} </h4>
                   <figure>
@@ -49,7 +49,7 @@
             {% endif %}
             <div class="ps-tab" id="{{ obj.slug }}">
               <div class="ps-product--combo">
-                <div class="ps-product__thumbnail"><img src="{{ obj.image.url }}" alt=""><a class="ps-product__overlay" href="product-default.html"></a><span class="ps-badge ps-badge--sale"><i>30%</i></span></div>
+                <div class="ps-product__thumbnail"><img src="{{ obj.image.url }}" alt=""><a class="ps-product__overlay" href="{% url 'product-detail' obj.slug %}"></a><span class="ps-badge ps-badge--sale"><i>30%</i></span></div>
                 <div class="ps-product__content">
                   <h4 class="ps-product__title"> {{ obj.name }} </h4>
                   <figure>
