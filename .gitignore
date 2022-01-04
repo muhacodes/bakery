@@ -7,6 +7,8 @@ db.sqlite3
 media
 project/settings.py
 
+test.txt
+
 # Backup files # 
 *.bak 
 
