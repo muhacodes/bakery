@@ -114,6 +114,9 @@ WSGI_APPLICATION = 'project.wsgi.application'
 #     }
 # }
 
+
+# this is extra fields hoss!!!!
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
