@@ -16,8 +16,8 @@ $(document).ready(function(){
     // //     alert('yh');
     // // });
 
-    
-    
+
+
 });
 
 
@@ -28,7 +28,7 @@ function increment_value(){
 
         var quantity = $('#'+id+'').val();
         quantity = parseInt(quantity) + 1;
-        
+
         $('#'+id+'').val(quantity);
         $('#phone_cart_quantity'+id+'').html(quantity);
         $('#side_cart_quantity'+id+'').html(quantity);
@@ -52,38 +52,38 @@ function decreament_value(){
             $('#phone_cart_quantity'+id+'').html(quantity);
             $('#side_cart_quantity'+id+'').html(quantity);
         }
-        
+
         decrement_cart(id);
         var total = price * quantity
         $('#total'+id+'').html(total.toLocaleString());
         $('#total_amount_phone_cart'+id+'').html(total.toLocaleString());
         getTotal();
-        
+
     });
 }
 
 function increment_cart(id){
     $.ajax({
         url: '/cart/increment/'+id+' ',
-        
+
         dataType: 'json',
         success: function (response) {
             var msg = response.message
             if (msg == "success"){
                 getTotal();
             }
-            
+
         }
     });
 }
 function decrement_cart(id){
     $.ajax({
         url: '/cart/decrement/'+id+' ',
-        
+
         dataType: 'json',
         success: function (response) {
             if (response.message = 's') {
-            
+
             }
         }
     });
@@ -94,10 +94,10 @@ function remote_cart(){
         if ( confirm("are you sure?") ){
 
             var id = $(this).data('id');
-    
+
             $.ajax({
                 url: '/cart/clear/'+id+' ',
-                
+
                 dataType: 'json',
                 success: function (response) {
                     if (response.message = 'success') {
@@ -119,7 +119,7 @@ function getTotal(){
         var t = b + a;
         total_amount = t;
         // alert(t);
-        
+
     });
     $('#subtotal').html(total_amount);
     $('#side_cart_total').html(total_amount);
@@ -137,7 +137,7 @@ function SendEmailContactForm(){
         const formdata = $(this).serialize();
         // $('form').serialize()
         $.ajax({
-            url: '/contact',
+            url: '/contact-us',
             type : "POST",
             headers:{
                 "X-CSRFToken": csrftoken

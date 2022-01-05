@@ -31,23 +31,28 @@ def contact_us(request):
     form = ContactForm(request.POST or None)
 
     if form.is_valid():
-        name = form.cleaned_data['name']
-        email = form.cleaned_data['email']
-        phone = form.cleaned_data['phone']
-        message = form.cleaned_data['message']
+        email = request.POST['email']
+        name = request.POST['name']
+        phone = request.POST['phone']
+        message = request.POST['message']
+
 
         content = """"
-        New Email From : {}
-        Email : {}
-        phone : {}
-        Message : {}
+            New Email From : {}
+            Email : {}
+            phone : {}
+            Message : {}
 
-        """.format(name, email, phone, message)
+            """.format(name, email, phone, message)
+
+        my_dict = {"message":[],};
         try:
-            # send_mail(name, message, 'infomohacodes@gmail.com', ['infomohacodes@gmail.com'])
-            return HttpResponse("success")
+            send_mail(name, content, 'infomohacodes@gmail.com', ['infomohacodes@gmail.com'])
+            my_dict["message"].append(1)
         except BadHeaderError:
-            return HttpResponse('Invalid header found.')
+            my_dict["message"].append(0)
+
+        return JsonResponse(my_dict)
 
     context = {
         'form' : form,
@@ -63,8 +68,8 @@ def sendemail(request):
         name = request.POST['name']
         phone = request.POST['phone']
         message = request.POST['message']
-        
-        
+
+
         content = """"
             New Email From : {}
             Email : {}
@@ -89,5 +94,5 @@ def about(request):
 
 
 def confirm(request):
-    
+
     return render(request, 'frontend/confirmation.html')

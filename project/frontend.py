@@ -40,8 +40,8 @@ urlpatterns = [
 
     path('contact-us', views.contact_us, name='contact'),
 
-    path('contact', views.sendemail, name='contactEmail'),
-    
+    # path('contactemail', views.sendemail, name='contactEmail'),
+
 ]
 
 if settings.DEBUG:
