@@ -6,17 +6,23 @@ from account.models import customer
 from .models import Address, Order, OrderItem
 from product.models import Product
 from cart.cart import Cart
+from django.core.mail import send_mail, BadHeaderError
 # Create your views here.
 
 def checkout(request):
     addressforms = addressForm(request.POST or None)
     customerForm = customerAdd(request.POST or None)
     if request.method =='POST':
+
+        #  some variable names
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone_number']
         
         customerobj = customer.objects.create(
-            email = request.POST['email'],
-            name = request.POST['name'],
-            phone_number = request.POST['phone_number'],
+            email = email,
+            name = name,
+            phone_number = phone
         )
         customerobj.save()
         customerinstance = customer.objects.get(id=customerobj.id)
@@ -51,13 +57,15 @@ def checkout(request):
             message = request.POST['notes'],
         )
         
-        print(mylist)
+        # print(mylist)
         for x in mylist:
            myorder.item.add(OrderItem.objects.get(id=x))
          
-        print(mylist)
+        # print(mylist)
         cart = Cart(request)
         cart.clear()
+        sendemailsystem(name, 2654,  email, phone)
+        sendUserEmail(name, 254, email)
         return HttpResponseRedirect(reverse('confirm'))
         
         return HttpResponse("end point reached")
@@ -82,11 +90,32 @@ def check(request):
 
 
 
+def sendemailsystem(name, order_code, email, phone):
+    content = """
+            {} has placed an order:
+            Email : {}
+            Order Code : {}
+            Phone : {}
+            Check website for more information about the order
 
-    # order_obj = Order(
-    #             item = product_instance,
-    #             address= Address.objects.get(addressobj.id),
-    #             quantity= value['quantity'],
-    #             message= request.POST['notes'],
-    #             price=value['price'],
-    #         )
+            """.format(name,email, order_code, phone,)
+    try:
+        msg = send_mail('Order has been placed', content, 'infomohacodes@gmail.com', ['infomohacodes@gmail.com'])
+        return msg
+    except BadHeaderError:
+        return 'error'
+
+
+
+def sendUserEmail(name, order_code, email ):
+    content = """
+            {} You have succesfully placed an order with us, sit back and Relax while we process your order!!:
+            Order ID: : {}
+            
+
+            """.format(name, order_code,)
+    try:
+        msg = send_mail('Order has been placed', content, 'infomohacodes@gmail.com', [email])
+        return msg
+    except BadHeaderError:
+        return 'error'

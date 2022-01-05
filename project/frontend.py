@@ -39,6 +39,8 @@ urlpatterns = [
     path('confirmation-order', views.confirm, name='confirm'),
 
     path('contact-us', views.contact_us, name='contact'),
+
+    path('contact', views.sendemail, name='contactEmail'),
     
 ]
 

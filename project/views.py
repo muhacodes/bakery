@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from backend.models import Testimonials
 from product.models import Category, Product
 from django.urls import reverse
@@ -32,12 +32,20 @@ def contact_us(request):
 
     if form.is_valid():
         name = form.cleaned_data['name']
-        email = form.cleaned_data['from_email']
+        email = form.cleaned_data['email']
         phone = form.cleaned_data['phone']
         message = form.cleaned_data['message']
 
+        content = """"
+        New Email From : {}
+        Email : {}
+        phone : {}
+        Message : {}
+
+        """.format(name, email, phone, message)
         try:
-            send_mail(name, message, email, ['admin@example.com'])
+            # send_mail(name, message, 'infomohacodes@gmail.com', ['infomohacodes@gmail.com'])
+            return HttpResponse("success")
         except BadHeaderError:
             return HttpResponse('Invalid header found.')
 
@@ -46,6 +54,34 @@ def contact_us(request):
     }
     return render(request, 'frontend/contact-us.html', context)
 
+
+def sendemail(request):
+    form = ContactForm(request.POST or None)
+    if form.is_valid():
+
+        email = request.POST['email']
+        name = request.POST['name']
+        phone = request.POST['phone']
+        message = request.POST['message']
+        
+        
+        content = """"
+            New Email From : {}
+            Email : {}
+            phone : {}
+            Message : {}
+
+            """.format(name, email, phone, message)
+
+        my_dict = {"message":[],};
+        try:
+            send_mail(name, content, 'infomohacodes@gmail.com', ['infomohacodes@gmail.com'])
+            my_dict["message"].append(1)
+        except BadHeaderError:
+            my_dict["message"].append(0)
+
+        return JsonResponse(my_dict)
+    return JsonResponse({'message': 'form is not valid'})
 
 
 def about(request):
