@@ -23,7 +23,7 @@
         
       </div>
       
-      <form class="ps-form--contact" action="#" method="post">
+      <form id="contact_form" class="ps-form--contact" action="#" method="post">
         {% csrf_token %}
         <div class="ps-form__header">
           <p>Contact</p>
@@ -40,8 +40,11 @@
             </div>
             {% endfor %}
           </div>
-          <div class="ps-form__submit">
+          <div class=" my-5 ps-form__submit">
             <button class="ps-btn">Submit</button>
+          </div>
+          <div id="Email_message" style="display: none;" class="my-5 font-weight-bold alert alert-success">
+            <p> You're Email has been succesfully sent hoss!! </p>
           </div>
         </div>
       </form>

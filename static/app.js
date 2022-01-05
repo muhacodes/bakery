@@ -5,7 +5,7 @@ $(document).ready(function(){
     decreament_value();
     remote_cart();
     getTotal();
-
+    SendEmailContactForm();
     // $('.ClickedMessage').on('click', function(){
     //     const message = $('.m').attr('value');
 
@@ -126,4 +126,34 @@ function getTotal(){
     $('#phone_cart_total').html(total_amount);
     // alert(total_amount);
 
+}
+
+
+function SendEmailContactForm(){
+    $('#contact_form').submit(function(e) {
+        e.preventDefault();
+        var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+
+        const formdata = $(this).serialize();
+        // $('form').serialize()
+        $.ajax({
+            url: '/contact',
+            type : "POST",
+            headers:{
+                "X-CSRFToken": csrftoken
+            },
+            data: formdata,
+            // dataType: 'json',
+            success: function (response) {
+                if (response.message == 1){
+                    $("#contact_form").trigger('reset');
+                    $('#Email_message').slideDown(1000,'swing',function(){
+                        setTimeout(function() {
+                            $('#Email_message').slideUp(1000);
+                        }, 4000);
+                    })
+                }
+            }
+        });
+    });
 }
