@@ -8,6 +8,7 @@ media
 project/settings.py
 project/try.txt
 test.txt
+media
 
 # Backup files # 
 *.bak 

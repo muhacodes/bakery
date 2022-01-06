@@ -1,3 +1,4 @@
+from django.forms import fields
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -7,6 +8,9 @@ from product.models import Product, Category
 from order.models import Order
 from .models import Testimonials
 from django.contrib import messages
+from django.views.generic import UpdateView
+import os
+from project.settings import BASE_DIR
 # Create your views here.
 
 
@@ -80,12 +84,21 @@ def product_add(request):
     return render(request, 'backend/product-add.html', {'form': form})
 
 
+# class product_edit(UpdateView):
+#     model = Product
+#     form_class = 'product_form'
+#     template_name = 'backend/product-edit.html'
+#     success_url = '/'
+
 def product_edit(request, pk):
-    object = Product.objects.get(id=pk)
-    form = product_form(request.POST or None, instance=object)
+    obj = Product.objects.get(id=pk)
+    form = product_form(request.POST or None, request.FILES or None, instance=obj)
     
     if form.is_valid():
-        form.save()
+        obj = form.save(commit=False)
+        print(obj.image.storage)
+        obj.save()
+        print(obj)
         messages.error(request, 'Your actions have been succesfully saved !')
         return HttpResponseRedirect(reverse('backend:product'))
     
