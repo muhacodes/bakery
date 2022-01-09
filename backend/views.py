@@ -9,6 +9,7 @@ from order.models import Order
 from .models import Testimonials
 from django.contrib import messages
 from django.views.generic import UpdateView
+from django.db.models import Sum
 import os
 from project.settings import BASE_DIR
 # Create your views here.
@@ -17,8 +18,10 @@ from project.settings import BASE_DIR
 def home(request):
     
     context = {
-
+        'orders' : Order.objects.all().count(),
+        'products' : Product.objects.all().count(),
     }
+
     return render(request, 'backend/home.html', context)
 
 
